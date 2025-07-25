@@ -59,28 +59,80 @@ export type WidgetPosition =
 // Init data for the store
 const initData: State = {
   background: {
-    id: "default-unsplash",
-    key: "background/unsplash",
+    id: "2b4ZpJsXz-eu",
+    key: "background/gradient",
     display: {
       luminosity: -0.2,
       blur: 0,
     },
   },
-  "widget/default-time": {
-    id: "default-time",
-    key: "widget/time",
-    order: 0,
-    display: {
-      position: "middleCentre",
-    },
+  "data/2b4ZpJsXz-eu": {
+    "angle": 315,
+    "from": "#727de6",
+    "to": "#055fa6",
+    "type": "linear-gradient"
   },
-  "widget/default-greeting": {
-    id: "default-greeting",
-    key: "widget/greeting",
-    order: 1,
-    display: {
-      position: "middleCentre",
-    },
+  "widget/cBUFb-87HbZl": null,
+  "widget/default-time": {
+    "id": "default-time",
+    "key": "widget/time",
+    "order": 2,
+    "display": {
+      "position": "middleCentre",
+      "fontSize": 16
+    }
+  },
+  "widget/default-greeting": null,
+  "widget/s5srpiImAL7k": {
+    "id": "s5srpiImAL7k",
+    "key": "widget/time",
+    "order": 0,
+    "display": {
+      "position": "middleCentre"
+    }
+  },
+  "data/s5srpiImAL7k": {
+    "mode": "analogue",
+    "hour12": false,
+    "showDate": false,
+    "showMinutes": true,
+    "showSeconds": true,
+    "showDayPeriod": true,
+    "timeZone": null
+  },
+  "data/default-time": {
+    "mode": "digital",
+    "hour12": true,
+    "showDate": true,
+    "showMinutes": true,
+    "showSeconds": false,
+    "showDayPeriod": true,
+    "timeZone": null
+  },
+  "widget/4pFQD6T7K99e": {
+    "id": "4pFQD6T7K99e",
+    "key": "widget/time",
+    "order": 1,
+    "display": {
+      "position": "middleCentre",
+      "fontSize": 8
+    }
+  },
+  "widget/wGENxLTxeh1L": null,
+  "widget/Tebollcmqy5c": null,
+  "widget/Qcd30bAQG-jp": {
+    "id": "Qcd30bAQG-jp",
+    "key": "widget/message",
+    "order": 3,
+    "display": {
+      "position": "middleCentre",
+      "fontSize": 16
+    }
+  },
+  "data/Qcd30bAQG-jp": {
+    "messages": [
+      "\n\nWelcome to New Tab Page!\n\nCustomize it using the ⚙ icon\non the top left corner :)\n\n(=^･ω･^=))ﾉ彡☆"
+    ]
   },
   focus: false,
   locale: defaultLocale,
