@@ -1,39 +1,59 @@
 name: Push
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   test:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
           cache: npm
       - run: npm ci
       - run: npm test
   build:
-    name: Build ${{ matrix.build_target }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        build_target:
-          - chromium
-          - firefox
-          - web
+        os: [ubuntu-latest]
+        node: [20]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v3
         with:
-          node-version: 16
-          cache: npm
-      - run: npm ci
-      - run: npm run build:${{ matrix.build_target }}
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies 👨🏻‍💻
+        run: npm ci
+
+      - name: Build site 🛠
+        run: npm run build:web
         env:
           GIPHY_API_KEY: ${{ secrets.GIPHY_API_KEY }}
           UNSPLASH_API_KEY: ${{ secrets.UNSPLASH_API_KEY }}
-      - uses: actions/upload-artifact@v3
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          name: tabliss-${{ matrix.build_target }}
-          path: dist/${{ matrix.build_target }}
+          branch: dist # The branch the action should deploy to.
+          folder: ./dist/web # The folder the action should deploy.
+          single-commit: true
+          force: true
+          commit-message: "Deploy 🚀"
